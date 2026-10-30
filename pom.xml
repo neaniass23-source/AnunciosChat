@@ -9,8 +9,6 @@
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>AnunciosChat</name>
-
     <properties>
         <maven.compiler.release>17</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -34,22 +32,36 @@
 
     <build>
         <finalName>${project.artifactId}-${project.version}</finalName>
+
+        <!-- Los archivos estan sueltos en la raiz del repositorio -->
+        <sourceDirectory>${project.basedir}</sourceDirectory>
+
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>${project.basedir}</directory>
                 <filtering>true</filtering>
                 <includes>
                     <include>plugin.yml</include>
                 </includes>
             </resource>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>${project.basedir}</directory>
                 <filtering>false</filtering>
-                <excludes>
-                    <exclude>plugin.yml</exclude>
-                </excludes>
+                <includes>
+                    <include>config.yml</include>
+                </includes>
+            </resource>
+            <!-- Las imagenes se meten en la carpeta imagenes/ dentro del jar -->
+            <resource>
+                <directory>${project.basedir}</directory>
+                <filtering>false</filtering>
+                <targetPath>imagenes</targetPath>
+                <includes>
+                    <include>*.png</include>
+                </includes>
             </resource>
         </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
